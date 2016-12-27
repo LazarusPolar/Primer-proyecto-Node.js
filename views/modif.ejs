@@ -1,0 +1,131 @@
+<html>
+<head>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Uso y carga de MUI CSS  -->
+    <link href="//cdn.muicss.com/mui-0.9.7/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.7/js/mui.min.js"></script>
+
+<!--Pasar esto a un archivo CSS -->
+<style rel="stylesheet">
+    dialog {
+  width: 500px;
+  background: #e8e8e8;
+  border: 1px solid #dadada;
+  font-family: sans-serif;
+  padding: 5px 10px 20px 20px;
+}
+</style>
+</head>
+<body>
+
+  <div align="center" style="margin-top: 20px"><img src="habil.png"></div>
+  <div align="center" class="mui--text-headline" style="margin-top: 20px">Registro de usuarios</div>
+  <div align="center" class="mui--text-title" style="margin-bottom: 10px">Aplicación usando Node.js, Express.js, MongoDB y MUI.</div>
+
+<div class="mui-panel" style="margin: 50px 100px 100px 100px;">
+<legend style = "margin-top: 15px">Modificando registro</legend>
+<form action='/usuariosmodif:<%= usuario[0]._id %>' method="POST">
+  <div class="mui-panel">
+  <legend>Datos personales</legend>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="text" name="nombre" value='<%= usuario[0].nombre %>' required>
+    <label>Nombre</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="text" name="apellidop" value='<%= usuario[0].apellidop %>' required>
+    <label>Apellido Paterno</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="text" name="apellidom" value='<%= usuario[0].apellidom %>'required>
+    <label>Apeliido Materno</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="number" name="edad" min="12" max="100" value='<%= usuario[0].edad %>'required>
+    <label>Edad</label>
+  </div>
+  <div class="mui-select">
+  <select name ="sexo">
+    <option value="Masculino" <%if(usuario[0].sexo == "Masculino"){ %> selected <%} %> >Masculino</option>
+    <option value="Femenino" <%if(usuario[0].sexo == "Femenino"){ %> selected <%} %> >Femenino</option>
+  </select>
+  <label>Sexo: </label>
+</div>
+</div>
+
+<legend>Dirección</legend>
+<div class="mui-panel">
+<div class="mui-textfield mui-textfield--float-label">
+  <input type="text" name="calle" value='<%= usuario[0].calle %>' required>
+  <label>Calle</label>
+</div>
+<div class="mui-textfield mui-textfield--float-label">
+  <input type="number" name="numint" value='<%= usuario[0].numint %>' required>
+  <label>Num Int.</label>
+</div>
+<div class="mui-textfield mui-textfield--float-label">
+  <input type="number" name="numext" value='<%= usuario[0].numext %>' required>
+  <label>Num Ext.</label>
+</div>
+<div class="mui-textfield mui-textfield--float-label">
+  <input type="text" name="colonia" value='<%= usuario[0].colonia %>' required>
+  <label>Colonia</label>
+</div>
+<div class="mui-textfield mui-textfield--float-label">
+  <input type="text" name="municipio" value='<%= usuario[0].municipio %>' required>
+  <label>Municipio</label>
+</div>
+<div class="mui-textfield mui-textfield--float-label">
+  <input type="text" name="estado" value='<%= usuario[0].estado %>' required>
+  <label>Estado</label>
+</div>
+</div>
+
+<legend> Particulares </legend>
+<div class="mui-panel">
+<p>Intereses personales</p>
+<input type="checkbox" style="margin: 10px" name="musica" value="Si" <%if(usuario[0].musica == "Si"){ %> checked <%} %> >Música
+<input type="checkbox" style="margin: 10px" name="cine" value="Si" <%if(usuario[0].cine == "Si"){ %> checked <%} %> >Cine
+<input type="checkbox" style="margin: 10px" name="modelado" value="Si" <%if(usuario[0].modelado == "Si"){ %> checked <%} %> >Modelado
+<input type="checkbox" style="margin: 10px" name="compras" value="Si" <%if(usuario[0].compras == "Si"){ %> checked <%} %> >Compras
+
+<p>Destino de preferencia</p>
+<input type="checkbox" style="margin: 10px" name="desierto" value="Si" <%if(usuario[0].desierto == "Si"){ %> checked <%} %> >Desierto
+<input type="checkbox" style="margin: 10px" name="playa" value="Si" <%if(usuario[0].playa == "Si"){ %> checked <%} %> >Playa
+<input type="checkbox" style="margin: 10px" name="ciudad" value="Si" <%if(usuario[0].ciudad == "Si"){ %> checked <%} %> >Ciudad
+<input type="checkbox" style="margin: 10px" name="montana" value="Si" <%if(usuario[0].montana == "Si"){ %> checked <%} %> >Montaña
+
+<div class="mui-select">
+<select name="propiedad" >
+  <option value = "casa" <%if(usuario[0].propiedad == "casa"){ %> selected <%} %> >Casa propia</option>
+  <option value = "departamento" <%if(usuario[0].propiedad == "departamento"){ %> selected <%} %> >Departamento</option>
+  <option value = "renta" <%if(usuario[0].propiedad == "renta"){ %> selected <%} %> >Renta</option>
+</select>
+<label>Tipo de habitación </label>
+</div>
+
+<div class="mui-select">
+<select name = "ingreso">
+<option value ="2500" <%if(usuario[0].ingreso == "2500"){ %> selected <%} %> >2,500 - 5,000</option>
+<option value ="5001" <%if(usuario[0].ingreso == "5001"){ %> selected <%} %> >5,001 - 7,000</option>
+<option value ="7001" <%if(usuario[0].ingreso == "7001"){ %> selected <%} %> >7,001 - 10,000</option>
+</select>
+<label>Ingreso mensual </label>
+</div>
+
+<div class="mui-select">
+<select name = "viajes">
+<option value = "1" <%if(usuario[0].viajes == "1"){ %> selected <%} %>>1 - 3</option>
+<option value = "4" <%if(usuario[0].viajes == "4"){ %> selected <%} %>>4 - 6</option>
+<option value = "7" <%if(usuario[0].viajes == "7"){ %> selected <%} %>>7 - 10</option>
+</select>
+<label>Viajes realizados en el año </label>
+</div>
+
+</div>
+<Button type="Submit" id="">Actualizar</Button>
+</form>
+</div>
+</body>
+</html>

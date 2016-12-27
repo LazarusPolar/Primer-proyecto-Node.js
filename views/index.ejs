@@ -1,0 +1,189 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Uso y carga de MUI CSS  -->
+    <link href="//cdn.muicss.com/mui-0.9.7/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.7/js/mui.min.js"></script>
+
+<!--Pasar esto a un archivo CSS -->
+<style rel="stylesheet">
+    dialog {
+  width: 500px;
+  background: #e8e8e8;
+  border: 1px solid #dadada;
+  font-family: sans-serif;
+  padding: 5px 10px 20px 20px;
+}
+</style>
+
+</head>
+<body>
+  <div align="center" style="margin-top: 20px"><img src="habil.png"></div>
+  <div align="center" class="mui--text-headline" style="margin-top: 20px">Registro de usuarios</div>
+  <div align="center" class="mui--text-title" style="margin-bottom: 50px">Aplicación usando Node.js, Express.js, MongoDB y MUI.</div>
+
+  <table class="mui-table mui-table--bordered" style="padding: 0px 50px 50px 50px">
+    <thead>
+      <tr>
+        <th> Nombre </th>
+        <th> Apellido Paterno </th>
+        <th> Apellido Materno </th>
+        <th> Edad </th>
+        <th> Sexo </th>
+        <th> </th>
+        <th> </th>
+      </tr>
+    </thead>
+    <tbody>
+    <!-- La variable usuario es la que se declara en el aplicacion.js
+    como arreglo en la parte de app.post-->
+  <% for(var i=0; i<usuario.length; i++) {%>
+    <tr class="usuario">
+      <td><%= usuario[i].nombre %></td>
+      <td><%= usuario[i].apellidop %></td>
+      <td><%= usuario[i].apellidom %></td>
+      <td><%= usuario[i].edad %></td>
+      <td><%= usuario[i].sexo %></td>
+      <td><form action='/modifica:<%= usuario[i]._id %>' method="GET"><Button id='<%= i %>' class="mui-btn mui-btn--small mui-btn--primary" type="Submit">Modificar</Button></form></td>
+      <td><form action='/usuariosborra:<%= usuario[i]._id %>' method="GET"><Button value='<%= usuario[i]._id %>' class="mui-btn mui-btn--small mui-btn--primary" type="Submit">Borrar</Button></form></td>
+    </tr>
+<% } %>
+</table>
+
+<!-- Dialogo para nuevo registro de usuario -->
+<div id="dialogo" style='margin: 5%;'>
+  <legend style = "margin-top: 15px">Nuevo registro de usuario </legend>
+  <form action="/usuarios" method="POST">
+    <div class="mui-panel">
+
+      <!-- ESPACIO DE DATOS PERSONALES -->
+    <legend>Datos personales</legend>
+    <div class="mui-textfield mui-textfield--float-label">
+      <input type="text" name="nombre" required>
+      <label>Nombre</label>
+    </div>
+    <div class="mui-textfield mui-textfield--float-label">
+      <input type="text" name="apellidop" required>
+      <label>Apellido Paterno</label>
+    </div>
+    <div class="mui-textfield mui-textfield--float-label">
+      <input type="text" name="apellidom" required>
+      <label>Apeliido Materno</label>
+    </div>
+    <div class="mui-textfield mui-textfield--float-label">
+      <input type="number" name="edad" min="12" max="100" required>
+      <label>Edad</label>
+    </div>
+    <div class="mui-select">
+    <select name ="sexo">
+      <option value="Masculino" selected >Masculino</option>
+      <option value="Femenino">Femenino</option>
+    </select>
+    <label>Sexo: </label>
+  </div>
+</div>
+
+<!-- ESPACIO DE DATOS DE DIRECCION -->
+<legend>Dirección</legend>
+<div class="mui-panel">
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="text" name="calle" required>
+    <label>Cale</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="number" name="numint" required>
+    <label>Num Int.</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="number" name="numext" required>
+    <label>Num Ext.</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="text" name="colonia" required>
+    <label>Colonia</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="text" name="municipio" required>
+    <label>Municipio</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <input type="text" name="estado" required>
+    <label>Estado</label>
+  </div>
+</div>
+
+<!-- ESPACIO DE DATOS PARTICULARES -->
+<legend> Particulares </legend>
+<div class="mui-panel">
+  <p>Intereses personales</p>
+  <input type="checkbox" style="margin: 10px" name="musica" value="Si">Música
+  <input type="checkbox" style="margin: 10px" name="cine" value="Si">Cine
+  <input type="checkbox" style="margin: 10px" name="modelado" value="Si">Modelado
+  <input type="checkbox" style="margin: 10px" name="compras" value="Si">Compras
+
+  <p>Destino de preferencia</p>
+  <input type="checkbox" style="margin: 10px" name="desierto" value="Si">Desierto
+  <input type="checkbox" style="margin: 10px" name="playa" value="Si">Playa
+  <input type="checkbox" style="margin: 10px" name="ciudad" value="Si">Ciudad
+  <input type="checkbox" style="margin: 10px" name="montana" value="Si">Montaña
+
+  <div class="mui-select">
+  <select name="propiedad">
+    <option value = "casa" selected>Casa propia</option>
+    <option value = "departamento">Departamento</option>
+    <option value = "renta">Renta</option>
+  </select>
+  <label>Tipo de habitación </label>
+</div>
+
+<div class="mui-select">
+<select name = "ingreso">
+  <option value ="2500" selected>2,500 - 5,000</option>
+  <option value ="5001">5,001 - 7,000</option>
+  <option value ="7001">7,001 - 10,000</option>
+</select>
+<label>Ingreso mensual </label>
+</div>
+
+<div class="mui-select">
+<select name = "viajes">
+  <option value = "1" selected>1 - 3</option>
+  <option value = "4">4 - 6</option>
+  <option value = "7">7 - 10</option>
+</select>
+<label>Viajes realizados en el año </label>
+</div>
+
+</div>
+<Button type="Submit" class="mui-btn mui-btn--small mui-btn--primary">Realizar registro</Button>
+  </form>
+  <!-- Boton fuera del form ya que dentro del mismo ocasionaba
+  que se hiciera un nuevo registro en la DB -->
+    <Button id="cerrar" class="mui-btn mui-btn--danger">Cerrar</Button>
+</div>
+<button id="mostrar" class="mui-btn mui-btn--small mui-btn--primary" style="margin-left: 60px; margin-bottom: 40px;">Nuevo Registro</button>
+
+
+
+
+<!-- DEBIDO A QUE EN FIREFOX NO EXISTE LA ETIQUETA DE HTML5 TAG
+SE ESCRIBIO ESTE CODIGO PARA REALIZAR UN EFECTO TOGGLE Y MOSTRAR Y ESCONDER
+EL FORMULARIO DE NUEVO REGISTRO DENTRO DE LA WEB -->
+<script>
+var boton = document.getElementById('mostrar');
+
+boton.onclick = function() {
+    var div = document.getElementById('dialogo');
+    if (div.style.display !== 'none') {
+        div.style.display = 'none';
+    }
+    else {
+        div.style.display = 'block';
+    }
+};
+</script>
+
+</body>
+</html>
